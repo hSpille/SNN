@@ -3,6 +3,7 @@ package de.hspille.neural;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -72,7 +73,8 @@ public class SimpleNeuralNet implements Serializable {
 		// System.out.println("Output Neurons   : " + outputLayer.size());
 	}
 
-	public BigDecimal doStep() {
+	public BigDecimal doStep(BigDecimal ... list){
+		this.feedInput(Arrays.asList(list));
 		BigDecimal value = new BigDecimal(0);
 		for (Neuron neuron : outputLayer) {
 			value = value.add(neuron.calculateOutPut());
@@ -80,7 +82,7 @@ public class SimpleNeuralNet implements Serializable {
 		return value;
 	}
 
-	public void feedInput(List<BigDecimal> list) {
+	private void feedInput(List<BigDecimal> list) {
 		if (list.size() != inputs.size()) {
 			throw new RuntimeException("Inputvalues size != Inputs size");
 		}
