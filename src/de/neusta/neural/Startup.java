@@ -1,10 +1,16 @@
 package de.neusta.neural;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import com.xeiam.xchart.BitmapEncoder;
+import com.xeiam.xchart.BitmapEncoder.BitmapFormat;
+import com.xeiam.xchart.Chart;
+import com.xeiam.xchart.QuickChart;
 
 import de.neusta.neural.deepcopy.DeepCopy;
 
@@ -58,8 +64,25 @@ public class Startup {
 				logSucces(bestnetList, sin);
 				throw new RuntimeException("End");
 			}
+//			printNetValue(netList.get(0),i);
 			findBestNets(netList, bestnetList);
 			mutateBestNets(netList, bestnetList);
+		}
+
+	}
+
+	private static void printNetValue(SimpleNeuralNet simpleNeuralNet, int generation) {
+		double[] xData = new double[] { 1.1, 1.3};
+	    double[] yData = new double[] {simpleNeuralNet.doStep().doubleValue(),simpleNeuralNet.doStep().doubleValue()};
+		Chart c =  QuickChart.getChart("SNN ".concat(""+generation), "X", "Y", "y(x)", xData, yData); 
+		
+		try {
+			BitmapEncoder.saveBitmap(c, "./Sample_Chart"+generation, BitmapFormat.PNG);
+			//HighRest
+//			BitmapEncoder.saveBitmapWithDPI(c, "./charts", BitmapFormat.PNG, 300);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 	}
