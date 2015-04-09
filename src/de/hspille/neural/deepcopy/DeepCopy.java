@@ -1,4 +1,4 @@
-package de.neusta.neural.deepcopy;
+package de.hspille.neural.deepcopy;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

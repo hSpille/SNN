@@ -1,4 +1,4 @@
-package de.neusta.neural;
+package de.hspille.neural;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -12,7 +12,7 @@ import com.xeiam.xchart.BitmapEncoder.BitmapFormat;
 import com.xeiam.xchart.Chart;
 import com.xeiam.xchart.QuickChart;
 
-import de.neusta.neural.deepcopy.DeepCopy;
+import de.hspille.neural.deepcopy.DeepCopy;
 
 public class Startup {
 

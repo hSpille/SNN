@@ -1,9 +1,9 @@
-package de.neusta.neural.random;
+package de.hspille.neural.random;
 
 import java.math.BigDecimal;
 import java.util.Random;
 
-import de.neusta.neural.Startup;
+import de.hspille.neural.Startup;
 
 public class RandomDeliverer {
 

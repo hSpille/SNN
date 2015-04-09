@@ -1,4 +1,4 @@
-package de.neusta.neural;
+package de.hspille.neural;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
