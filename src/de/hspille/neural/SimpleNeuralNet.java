@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -104,6 +105,37 @@ public class SimpleNeuralNet implements Serializable {
 		for (Neuron output : outputLayer) {
 			output.mutate();
 		}
+	}
+	
+	public SimpleNeuralNet copyMe(){
+		SimpleNeuralNet myCopy = new SimpleNeuralNet();
+		List<Input> copyedInputs = new ArrayList<Input>();
+		for (Input input : this.inputs) {
+			Input copy = input.copyMe();
+			copyedInputs.add(copy);
+		} 
+
+		Map<Integer, List<Neuron>> hiddenLayerCopy = new HashMap<Integer,List<Neuron>>();
+		Iterator<Integer> hiddenLayerIterator = this.hiddenLayer.keySet().iterator();
+		while(hiddenLayerIterator.hasNext()) {
+			Integer currentLayerIndex = hiddenLayerIterator.next();
+			List<Neuron> currentHiddenRowLayer = hiddenLayer.get(currentLayerIndex);
+			List<Neuron> currentHiddenRowLayerCopy = new ArrayList<Neuron>();
+			for (Neuron neuron : currentHiddenRowLayer) {
+				Neuron copy = neuron.copyMe();
+				currentHiddenRowLayerCopy.add(copy);
+			}
+			hiddenLayerCopy.put(currentLayerIndex, currentHiddenRowLayerCopy);
+		}
+		List<Neuron> outputLayerCopy = new ArrayList<Neuron>();
+		for (Neuron neuron : this.outputLayer) {
+			Neuron copy = neuron.copyMe();
+			outputLayerCopy.add(copy);
+		}
+		myCopy.setOutputLayer(outputLayerCopy);
+		myCopy.setHiddenLayer(hiddenLayerCopy);
+		myCopy.setInputs(copyedInputs);
+		return myCopy;
 	}
 
 	public List<Input> getInputs() {

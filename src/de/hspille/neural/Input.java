@@ -29,14 +29,20 @@ public class Input implements Serializable {
 	}
 
 	public BigDecimal calculateOutput() {
-//		System.out.println("Inputs:" + input + "*" + weight);
-//		return input.multiply(weight);
+
 		return input;
 	}
 
 	public void mutate() {
 		RandomDeliverer instance = RandomDeliverer.getInstance();
 		weight = weight.add(instance.getMutation());
+	}
+
+	public Input copyMe() {
+		Input copy = new Input();
+		copy.setInput(this.input.add(BigDecimal.ZERO));
+		copy.setWeight(this.weight.add(BigDecimal.ZERO));
+		return copy;
 	}
 
 }

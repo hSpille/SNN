@@ -24,6 +24,7 @@ public class Neuron implements Serializable {
 	 * @return
 	 */
 	public BigDecimal calculateOutPut() {
+
 		BigDecimal activation = new BigDecimal(0);
 		for (Input inputNeuron : inputs) {
 			activation = activation.add(inputNeuron.calculateOutput());
@@ -80,6 +81,39 @@ public class Neuron implements Serializable {
 
 	public void setOutputNeuron(boolean isOutputNeuron) {
 		this.isOutputNeuron = isOutputNeuron;
+	}
+	
+	public Neuron copyMe(){
+		Neuron myCopy = new Neuron();
+		List<Neuron> copyedInputNeurons = new ArrayList<Neuron>();
+		for (Neuron neuron : inputNeurons) {
+			Neuron copy = neuron.copyMe();
+			copyedInputNeurons.add(copy);
+		}
+		myCopy.setInputNeurons(copyedInputNeurons);
+		List<Input> copyedInputs = new ArrayList<Input>();
+		for (Input input : inputs) {
+			Input copy = input.copyMe();
+			copyedInputs.add(copy);
+		}
+		List<BigDecimal> copyedWeights = new ArrayList<BigDecimal>();
+		for (BigDecimal orig : weights) {
+			BigDecimal copy= orig.add(BigDecimal.ZERO);
+			copyedWeights.add(copy);
+		}
+		
+		myCopy.setInputs(copyedInputs);
+		myCopy.setOutputNeuron(this.isOutputNeuron);
+		myCopy.setWeights(copyedWeights);
+		return myCopy;
+	}
+
+	public List<BigDecimal> getWeights() {
+		return weights;
+	}
+
+	public void setWeights(List<BigDecimal> weights) {
+		this.weights = weights;
 	}
 
 }
